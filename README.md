@@ -19,3 +19,26 @@ gitee改政策了，现在公开仓库要人工审核，所以直接放弃...
 
 ### 2.Minecraft_For_Win10_Crack
 绕过Minecraft For Win10 验证系统
+
+# Software-data EN
+Holds data for each software version Updates Announcements Bed information
+
+## Why is it on github?
+I don't have money to buy a server (student party), and github can directly access the original content, which is more convenient.
+And although domestic IPV6 is available as soon as you set it up in a light cat, but who will get it? And most people's routes don't support IPV6 ....
+
+## Why not choose domestic access to the stable high-speed gitee?
+gitee has changed its policy, now public repositories have to be manually reviewed, so just give up...
+And most of the future software development for international users, basically the domestic use of each have a VPN, do not worry about access to theawa
+
+## Will user data be leaked if it's put directly on github?
+No, this repository will not store user data, but only software data such as version data, updates, announcements, image bed information...
+There is no software currently planned that needs the last user data
+
+## What software is currently using this repository?
+### 1. Iwara-Forum-Searcher
+An Iwara forum crawler
+
+### 2.Minecraft_For_Win10_Crack
+Bypasses Minecraft For Win10 authentication system
+
