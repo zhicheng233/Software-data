@@ -16,3 +16,6 @@ gitee改政策了，现在公开仓库要人工审核，所以直接放弃...
 ## 目前用这个仓库的软件有哪些？
 ### 1.Iwara-Forum-Searcher
 一个Iwara论坛爬虫
+
+### 2.Minecraft_For_Win10_Crack
+绕过Minecraft For Win10 验证系统
