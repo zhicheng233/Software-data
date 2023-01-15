@@ -1,8 +1,3 @@
-<h1 align="center">这里是404界面！你所访问的内容不存在!</h1>
-<h1 align="center">Here is the 404 screen! The content you are visiting does not exist!</h1>
-
-<h2 align="center">网站维护 By 志成zhi_cheng 访问https://www.zhicheng233.ml获取更多信息~</h2>
-<h2 align="center">Website Maintenance By 志成zhi_cheng Visit https://www.zhicheng233.ml for more information~</h2>
 
 # 关于Software-data CN
 存放各软件版本数据 更新 公告 图床信息
