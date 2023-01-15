@@ -1,5 +1,5 @@
 ---
-permalink: /404.html
+permalink:/404.html
 ---
 # Software-data CN
 存放各软件版本数据 更新 公告 图床信息
