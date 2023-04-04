@@ -5,18 +5,16 @@ mode: Rule
 log-level: info
 external-controller: :9090
 proxies:
-  - name: "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+  - name: " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
     type: vmess
     server: v2ray1.zhicheng233.ml
-    port: 443
-    uuid: d8b1ee57-8d54-451c-a134-f4a56cba1e39
+    port: 42689
+    uuid: 9d7db45f-0013-4247-9dd9-3ef628cb9e81
     alterId: 0
     cipher: auto
-    tls: true
-    network: h2
-    h2-opts:
-      path: /2f0eeece/
-    skip-cert-verify: true
+    network: ws
+    ws-opts:
+      path: /zm7FqZK3/
   - name: 该节点由志成zhi_cheng🇨🇳🏳️‍⚧️随缘维护
     type: vmess
     server: 127.0.0.1
@@ -31,7 +29,8 @@ proxies:
     uuid: d8b1ee57-8d54-451c-a134-f4a56cba1e39
     alterId: "0"
     cipher: none
-  - name: 更多请访问www.zhicheng233.ml
+    _index: 2
+  - name: 访问data.zhicheng233.ml/clash了解最新消息
     type: vmess
     server: 127.0.0.1
     port: "233"
@@ -44,49 +43,49 @@ proxy-groups:
     proxies:
       - ♻️ 自动选择
       - DIRECT
-      - "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+      - " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
       - 该节点由志成zhi_cheng🇨🇳🏳️‍⚧️随缘维护
       - 有问题请TG联系@zhi_cheng233
-      - 更多请访问www.zhicheng233.ml
+      - 访问data.zhicheng233.ml/clash了解最新消息
   - name: ♻️ 自动选择
     type: url-test
     url: http://www.gstatic.com/generate_204
     interval: 300
     tolerance: 50
     proxies:
-      - "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+      - " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
   - name: 🌍 国外媒体
     type: select
     proxies:
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🎯 全球直连
-      - "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+      - " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
   - name: 📢 谷歌FCM
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
       - ♻️ 自动选择
-      - "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+      - " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
   - name: 📲 电报信息
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
-      - "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+      - " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
   - name: Ⓜ️ 微软服务
     type: select
     proxies:
       - 🎯 全球直连
       - 🚀 节点选择
-      - "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+      - " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
   - name: 🍎 苹果服务
     type: select
     proxies:
       - 🚀 节点选择
       - 🎯 全球直连
-      - "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+      - " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -114,7 +113,7 @@ proxy-groups:
       - 🚀 节点选择
       - 🎯 全球直连
       - ♻️ 自动选择
-      - "[VMess] 🇰🇷 [Azure韩国数据中心]志成的IPV4线路"
+      - " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
 rules:
   - DOMAIN-SUFFIX,acl4.ssr,🎯 全球直连
   - DOMAIN-SUFFIX,ip6-localhost,🎯 全球直连
