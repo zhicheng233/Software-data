@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>订阅链接</title>
+    <style>
+      body {
+        transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+      }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-gray-900 text-white">
+    <div class="container mx-auto my-10">
+      <div class="flex justify-between items-center mb-10">
+        <h1 class="text-4xl font-bold">zhi_cheng233 NetWork</h1>
+        <button onclick="toggleTheme()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          切换主题
+        </button>
+      </div>
+      <div class="mb-10">
+        <div class="flex items-center mb-5">
+        <h2 class="text-2xl font-semibold mb-1 mr-2">订阅链接</h2>
+        <button onclick="nodeDetection()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+          节点状态检测
+        </button>
+        </div>
+        <div class="flex items-center mb-5">
+          <p href="https://data.zhicheng233.ml/clash/node" class="mr-2">V2ray订阅:https://data.zhicheng233.ml/clash/node</p>
+          <button onclick="copyToClipboard('https://data.zhicheng233.ml/clash/node')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            复制
+          </button>
+        </div>
+        <div class="flex items-center mb-5">
+          <a href="https://data.zhicheng233.ml/clash/ClashV2ray" class="mr-2">Clash订阅:https://data.zhicheng233.ml/clash/ClashV2ray</a>
+          <button onclick="copyToClipboard('https://data.zhicheng233.ml/clash/ClashV2ray')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            复制
+          </button>
+        </div>
+      </div>
+      <div class="mb-10">
+        <h2 class="text-2xl font-semibold mb-5">注意事项</h2>
+        <p>不建议使用Clash，Clash并不支持KCP伪装容易会墙，如果节点出现问题将优先解决V2ray线路而不是Clash</p>
+        <p>所有节点已禁止BT下载，请勿使用该节点进行大规模下载或者播放2K+视频，Azure的流量还是很贵的</p>
+        <p>该节点仅用于学术交流，严禁访问、发布涉嫌危害国家安全的内容</p>
+      </div>
+      <div class="mb-10">
+        <h2 class="text-2xl font-semibold mb-5">最新消息</h2>
+        <p>23/4/5:</p>
+        <p>一个新的网页uwu~</p>
+        <p>重新配置了V2ray，将传输协议由h2改为kcp，开放另一个端口使用ws协议以兼容Clash</p>
+      </div>
+      <div class="text-sm text-gray-400">
+        如果你能记住我的名字，如果你们都能记住我的名字，也许我或者“我们”，终有一天能自由地生存着。
+        <br />
+        由志成zhi_cheng🏳️‍⚧️建设&维护
+        <br />
+        Contact: 
+        <a href="https://www.zhicheng233.ml" class="text-blue-500 hover:text-blue-700">Homes</a>
+        <a href="https://blog.zhicheng233.ml" class="text-blue-500 hover:text-blue-700">Blog</a>
+        <a href="https://twitter.com/zhi_cheng233" class="text-blue-500 hover:text-blue-700">Twitter</a>
+        <a href="https://www.github.com/zhicheng233" class="text-blue-500 hover:text-blue-700">Github</a>
+        <a href="https://space.bilibili.com/350354944" class="text-blue-500 hover:text-blue-700">Bilibili</a>
+        <a href="mailto:2473367376@qq.com" class="text-blue-500 hover:text-blue-700">E-mail</a>
+        <a href="https://www.zhicheng233.ml/Donate" class="text-blue-500 hover:text-blue-700">友情链接</a>
+        <a href="https://www.zhicheng233.ml/Donate" class="text-blue-500 hover:text-blue-700">捐赠吃口饭</a>
+        
+        
+      </div>
+    </div>
+
+    <script>
+      function copyToClipboard(text) {
+        navigator.clipboard.writeText(text);
+        alert('已复制到剪贴板');
+      }
+      function nodeDetection() {
+        alert('不久的将来~');
+      }
+      function toggleTheme() {
+        const body = document.querySelector('body');
+        if (body.classList.contains('bg-gray-900')) {
+          body.classList.remove('bg-gray-900');
+          body.classList.add('bg-white');
+          body.classList.remove('text-white');
+          body.classList.add('text-black');
+        } else {
+          body.classList.remove('bg-white');
+          body.classList.add('bg-gray-900');
+          body.classList.remove('text-black');
+          body.classList.add('text-white');
+        }
+      }
+    </script>
+  </body>
+</html>
