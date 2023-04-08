@@ -8,13 +8,13 @@ proxies:
   - name: " 🇰🇷 [1Gbps Azure韩国数据中心]志成的IPV4线路"
     type: vmess
     server: v2ray1.zhicheng233.ml
-    port: 42689
-    uuid: 9d7db45f-0013-4247-9dd9-3ef628cb9e81
+    port: "16348"
+    uuid: c6dd55ed-3672-48cd-a9cf-88c6713365a7
     alterId: 0
     cipher: auto
     network: ws
     ws-opts:
-      path: /zm7FqZK3/
+      path: /O4mwb7cF/
   - name: 该节点由志成zhi_cheng🇨🇳🏳️‍⚧️随缘维护
     type: vmess
     server: 127.0.0.1
