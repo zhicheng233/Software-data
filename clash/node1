@@ -1,33 +1,53 @@
+######### 锚点 start #######
+# proxy 相关
+pr: &pr {type: select, proxies: [默认,美国,其它地区,全部节点,自动选择,DIRECT]}
+
+#这里是订阅更新和延迟测试相关的
+p: &p {type: http, interval: 3600, health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300}}
+
+use: &use
+  type: select
+  use:
+  - provider1
+
+######### 锚点 end #######
+
+
+# url 里填写自己的订阅,名称不能重复
+proxy-providers:
+  provider1:
+    <<: *p
+    url: "https://data.zhicheng233.top/clash/node"
+
+mode: rule
+ipv6: true
+log-level: info
+allow-lan: true
 mixed-port: 7890
 unified-delay: false
-geodata-mode: true
-tcp-concurrent: false
-find-process-mode: strict
-global-client-fingerprint: chrome
-
-allow-lan: true
-mode: rule
-log-level: info
-ipv6: true
-
+tcp-concurrent: true
 external-controller: 127.0.0.1:9090
 
+geodata-mode: true
 geox-url:
-  geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
-  geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
-  mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  geoip: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+
+find-process-mode: strict
+global-client-fingerprint: chrome
 
 profile:
   store-selected: true
   store-fake-ip: true
 
 sniffer:
-  enable: false
+  enable: true
   sniff:
     TLS:
-      ports: [443]
+      ports: [443, 8443]
     HTTP:
-      ports: [80]
+      ports: [80, 8080-8880]
       override-destination: true
 
 tun:
@@ -40,317 +60,117 @@ tun:
 
 dns:
   enable: true
-  listen: 0.0.0.0:1053
+  listen: :1053
   ipv6: true
   enhanced-mode: fake-ip
   fake-ip-range: 28.0.0.1/8
   fake-ip-filter:
     - '*'
     - '+.lan'
+    - '+.local'
   default-nameserver:
     - 223.5.5.5
   nameserver:
-    - 'tls://8.8.4.4#DNS_Proxy'
-    - 'tls://1.0.0.1#DNS_Proxy'
+    - 'tls://8.8.4.4#dns'
+    - 'tls://1.0.0.1#dns'
   proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query#h3=true
+    - https://doh.pub/dns-query
   nameserver-policy:
     "geosite:cn,private":
-      - 223.5.5.5
-      - 114.114.114.114
-      - https://dns.alidns.com/dns-query#h3=true
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
 
-proxy-providers:
-  mnucdqdinf_provider:
-    type: http
-    path: ./mnucdqdinf_provider.yaml
-    url: https://data.zhicheng233.top/clash/node
-    interval: 3600
-    health-check:
-      enable: false
-      url: http://www.gstatic.com/generate_204
-      interval: 300
+proxies:
+  # - name: "WARP"
+  #   type: wireguard
+  #   server: engage.cloudflareclient.com
+  #   port: 2408
+  #   ip: "172.16.0.2/32"
+  #   ipv6: "2606::1/128"        # 自行替换
+  #   private-key: "private-key" # 自行替换
+  #   public-key: "public-key"   # 自行替换
+  #   udp: true
+  #   reserved: "abba"           # 自行替换
+  #   mtu: 1280
+  #   dialer-proxy: "dns"
+  #   remote-dns-resolve: true
+  #   dns:
+  #     - https://dns.cloudflare.com/dns-query
 
 proxy-groups:
-  - name: 手动切换
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies: null
-  - name: 自动选择
-    type: url-test
-    url: http://www.gstatic.com/generate_204
-    interval: 36000
-    tolerance: 50
-    use:
-      - mnucdqdinf_provider
-    proxies: null
 
-  - name: 全球代理
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 手动切换
-      - 自动选择
+  - {name: 默认, type: select, proxies: [DIRECT, 香港, 台湾, 日本, 新加坡, 美国, 其它地区, 全部节点, 自动选择]}
 
-  - name: 流媒体
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 手动切换
-      - 自动选择
-      - DIRECT
-  - name: DNS_Proxy
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 自动选择
-      - DIRECT
+  # - {name: dns, type: select, proxies: [DIRECT, WARP, 香港, 台湾, 日本, 新加坡, 美国, 其它地区, 全部节点, 自动选择]}  # 加入 WARP
+  - {name: dns, type: select, proxies: [DIRECT, 自动选择, 默认, 香港, 台湾, 日本, 新加坡, 美国, 其它地区, 全部节点]}
 
-  - name: Telegram
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 手动切换
-      - 自动选择
-  - name: Google
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 手动切换
-      - 自动选择
-      - DIRECT
-  - name: YouTube
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 手动切换
-      - 自动选择
-  - name: Netflix
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 流媒体
-      - 手动切换
-      - 自动选择
-  - name: Spotify
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 流媒体
-      - 手动切换
-      - 自动选择
-      - DIRECT
-  - name: HBO
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 流媒体
-      - 手动切换
-      - 自动选择
-  - name: Bing
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 自动选择
-  - name: OpenAI
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 自动选择
-      - 手动切换
-  - name: Disney
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 流媒体
-      - 手动切换
-      - 自动选择
-  - name: GitHub
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - 手动切换
-      - 自动选择
-      - DIRECT
+  - {name: Google, <<: *pr}
 
-  - name: 国内媒体
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - DIRECT
-  - name: 本地直连
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - DIRECT
-      - 自动选择
-  - name: 漏网之鱼
-    type: select
-    use:
-      - mnucdqdinf_provider
-    proxies:
-      - DIRECT
-      - 手动切换
-      - 自动选择
-rule-providers:
-  lan:
-    type: http
-    behavior: classical
-    interval: 86400
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan.yaml
-    path: ./Rules/lan.yaml
-  reject:
-    type: http
-    behavior: domain
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/reject.txt
-    path: ./ruleset/reject.yaml
-    interval: 86400
-  proxy:
-    type: http
-    behavior: domain
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt
-    path: ./ruleset/proxy.yaml
-    interval: 86400
-  direct:
-    type: http
-    behavior: domain
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
-    path: ./ruleset/direct.yaml
-    interval: 86400
-  private:
-    type: http
-    behavior: domain
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/private.txt
-    path: ./ruleset/private.yaml
-    interval: 86400
-  gfw:
-    type: http
-    behavior: domain
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/gfw.txt
-    path: ./ruleset/gfw.yaml
-    interval: 86400
-  greatfire:
-    type: http
-    behavior: domain
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/greatfire.txt
-    path: ./ruleset/greatfire.yaml
-    interval: 86400
-  tld-not-cn:
-    type: http
-    behavior: domain
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/tld-not-cn.txt
-    path: ./ruleset/tld-not-cn.yaml
-    interval: 86400
-  telegramcidr:
-    type: http
-    behavior: ipcidr
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/telegramcidr.txt
-    path: ./ruleset/telegramcidr.yaml
-    interval: 86400
-  applications:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt
-    path: ./ruleset/applications.yaml
-    interval: 86400
-  Disney:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Disney/Disney.yaml
-    path: ./ruleset/disney.yaml
-    interval: 86400
-  Netflix:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml
-    path: ./ruleset/netflix.yaml
-    interval: 86400
-  YouTube:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml
-    path: ./ruleset/youtube.yaml
-    interval: 86400
-  HBO:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/HBO/HBO.yaml
-    path: ./ruleset/hbo.yaml
-    interval: 86400
-  OpenAI:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml
-    path: ./ruleset/openai.yaml
-    interval: 86400
-  Bing:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Bing/Bing.yaml
-    path: ./ruleset/bing.yaml
-    interval: 86400
-  Google:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
-    path: ./ruleset/google.yaml
-    interval: 86400
-  GitHub:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml
-    path: ./ruleset/github.yaml
-    interval: 86400
-  Spotify:
-    type: http
-    behavior: classical
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Spotify/Spotify.yaml
-    path: ./ruleset/spotify.yaml
-    interval: 86400
-  ChinaMaxDomain:
-    type: http
-    behavior: domain
-    interval: 86400
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml
-    path: ./Rules/ChinaMaxDomain.yaml
-  ChinaMaxIPNoIPv6:
-    type: http
-    behavior: ipcidr
-    interval: 86400
-    url: https://mirror.ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_IP_No_IPv6.yaml
-    path: ./Rules/ChinaMaxIPNoIPv6.yaml
+  - {name: Telegram, <<: *pr}
+
+  - {name: Twitter, <<: *pr}
+
+  - {name: Pixiv, <<: *pr}
+
+  - {name: ehentai, <<: *pr}
+
+  - {name: 哔哩哔哩, <<: *pr}
+
+  - {name: 哔哩东南亚, <<: *pr}
+
+  - {name: 巴哈姆特, <<: *pr}
+
+  - {name: YouTube, <<: *pr}
+
+  - {name: NETFLIX, <<: *pr}
+
+  - {name: Spotify, <<: *pr}
+
+  - {name: Github, <<: *pr}
+
+  - {name: 国内, type: select, proxies: [DIRECT, 默认, 香港, 台湾, 日本, 新加坡, 美国, 其它地区, 全部节点, 自动选择]}
+
+  - {name: 其他, <<: *pr}
+
+#分隔,下面是地区分组
+  - {name: 香港, <<: *use,filter: "(?i)港|hk|hongkong|hong kong"}
+
+  - {name: 台湾, <<: *use, filter: "(?i)台|tw|taiwan"}
+
+  - {name: 日本, <<: *use, filter: "(?i)日本|jp|japan"}
+
+  - {name: 美国, <<: *use, filter: "(?i)美|us|unitedstates|united states"}
+
+  - {name: 新加坡, <<: *use, filter: "(?i)(新|sg|singapore)"}
+
+  - {name: 其它地区, <<: *use, filter: "(?i)^(?!.*(?:🇭🇰|🇯🇵|🇺🇸|🇸🇬|🇨🇳|港|hk|hongkong|台|tw|taiwan|日|jp|japan|新|sg|singapore|美|us|unitedstates)).*"}
+
+  - {name: 全部节点, <<: *use}
+
+  - {name: 自动选择, <<: *use, tolerance: 2, type: url-test}
+
 rules:
-  - RULE-SET,YouTube,YouTube,no-resolve
-  - RULE-SET,Google,Google,no-resolve
-  - RULE-SET,GitHub,GitHub
-  - RULE-SET,telegramcidr,Telegram,no-resolve
-  - RULE-SET,Spotify,Spotify,no-resolve
-  - RULE-SET,Netflix,Netflix
-  - RULE-SET,HBO,HBO
-  - RULE-SET,Bing,Bing
-  - RULE-SET,OpenAI,OpenAI
-  - RULE-SET,Disney,Disney
-  - RULE-SET,proxy,全球代理
-  - RULE-SET,gfw,全球代理
-  - RULE-SET,applications,本地直连
-  - RULE-SET,ChinaMaxDomain,本地直连
-  - RULE-SET,ChinaMaxIPNoIPv6,本地直连,no-resolve
-  - RULE-SET,lan,本地直连,no-resolve
-  - GEOIP,CN,本地直连
-  - MATCH,漏网之鱼
+  # - AND,(AND,(DST-PORT,443),(NETWORK,UDP)),(NOT,((GEOSITE,cn))),REJECT # quic
+
+  - GEOSITE,biliintl, 哔哩东南亚
+  - GEOSITE,ehentai,ehentai
+  - GEOSITE,github,Github
+  - GEOSITE,twitter,Twitter
+  - GEOSITE,youtube,YouTube
+  - GEOSITE,google,Google
+  - GEOSITE,telegram,Telegram
+  - GEOSITE,netflix,NETFLIX
+  - GEOSITE,bilibili,哔哩哔哩
+  - GEOSITE,bahamut,巴哈姆特
+  - GEOSITE,spotify,Spotify
+  - GEOSITE,geolocation-!cn,其他
+
+  # - AND,(AND,(DST-PORT,443),(NETWORK,UDP)),(NOT,((GEOIP,CN))),REJECT # quic
+  - GEOIP,google,Google
+  - GEOIP,netflix,NETFLIX
+  - GEOIP,telegram,Telegram
+  - GEOIP,twitter,Twitter
+  - GEOSITE,pixiv,Pixiv
+  - GEOSITE,CN,国内
+  - GEOIP,CN,国内
+  - MATCH,其他
