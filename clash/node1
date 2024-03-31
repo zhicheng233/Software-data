@@ -64,7 +64,7 @@ proxy-providers:
   mnucdqdinf_provider:
     type: http
     path: ./mnucdqdinf_provider.yaml
-    url: https://data.zhicheng233.top/clash/node1yaml
+    url: https://data.zhicheng233.top/clash/node
     interval: 3600
     health-check:
       enable: false
