@@ -1,0 +1,120 @@
+proxies:
+  - name: "该节点由志成zhi_cheng🇨🇳🏳️‍⚧️随缘维护"
+    type: vless
+    server: 172.0.0.1
+    port: 443
+    uuid: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    client-fingerprint: chrome
+  - name: "🇺🇸美西[0.5Gbps][ATCG Network]-VLESS_TCP/TLS_Vision"
+    type: vless
+    server: cdn-us1-ipv6server.zhicheng233.top
+    port: 443
+    uuid: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    client-fingerprint: chrome
+  - name: "🇺🇸美西[0.5Gbps][ATCG Network]-VLESS_WS"
+    type: vless
+    server: www.digitalocean.com
+    port: 443
+    uuid: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    udp: true
+    tls: true
+    network: ws
+    client-fingerprint: chrome
+    servername: cdn-us1-ipv6server.zhicheng233.top
+    ws-opts:
+      path: /mpyzws
+      headers:
+        Host: cdn-us1-ipv6server.zhicheng233.top
+  - name: "🇺🇸美西[0.5Gbps][ATCG Network]-vless_grpc"
+    type: vless
+    server: www.digitalocean.com
+    port: 443
+    uuid: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    udp: true
+    tls: true
+    network: grpc
+    client-fingerprint: chrome
+    servername: cdn-us1-ipv6server.zhicheng233.top
+    grpc-opts:
+      grpc-service-name: mpyzgrpc
+  - name: "🇺🇸美西[0.5Gbps][ATCG Network]-VMess_WS"
+    type: vmess
+    server: www.digitalocean.com
+    port: 443
+    uuid: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    alterId: 0
+    cipher: none
+    udp: true
+    tls: true
+    client-fingerprint: chrome
+    servername: cdn-us1-ipv6server.zhicheng233.top
+    network: ws
+    ws-opts:
+      path: /mpyzvws
+      headers:
+        Host: cdn-us1-ipv6server.zhicheng233.top
+  - name: "🇺🇸美西[0.5Gbps][ATCG Network]-trojan_tcp"
+    type: trojan
+    server: cdn-us1-ipv6server.zhicheng233.top
+    port: 443
+    password: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    client-fingerprint: chrome
+    udp: true
+    sni: cdn-us1-ipv6server.zhicheng233.top
+  - name: "🇺🇸美西[0.5Gbps][ATCG Network]-Trojan_gRPC"
+    server: www.digitalocean.com
+    port: 443
+    type: trojan
+    password: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    network: grpc
+    sni: cdn-us1-ipv6server.zhicheng233.top
+    udp: true
+    grpc-opts:
+      grpc-service-name: mpyztrojangrpc
+  - name: "🇺🇸美西[0.5Gbps][ATCG Network]-vless_reality_vision"
+    type: vless
+    server: cdn-us1-ipv6server.zhicheng233.top
+    port: 28476
+    uuid: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    servername: mensura.cdn-apple.com
+    reality-opts:
+      public-key: Dj6btqGoboSy-4-0I_trCXFRPC6T0hiO_0qEXbG0cl4
+      short-id: 6ba85179e30d4fc2
+    client-fingerprint: chrome
+  - name: "🇺🇸美西[0.5Gbps][ATCG Network]-vless_reality_grpc"
+    type: vless
+    server: cdn-us1-ipv6server.zhicheng233.top
+    port: 28476
+    uuid: a20b50b0-f65d-4b48-aaf4-6ceacd4283cc
+    network: grpc
+    tls: true
+    udp: true
+    servername: mensura.cdn-apple.com
+    reality-opts:
+      public-key: Dj6btqGoboSy-4-0I_trCXFRPC6T0hiO_0qEXbG0cl4
+      short-id: 6ba85179e30d4fc2
+    grpc-opts:
+      grpc-service-name: "grpc"
+    client-fingerprint: chrome
+  - name: "[0.5Gbps][ATCG Network]-singbox_hysteria2"
+    type: hysteria2
+    server: cdn-us1-ipv6server.zhicheng233.top
+    port: 35040
+    password: a38d6535-6403-4e43-b6d1-b3c71336bc17
+    alpn:
+        - h3
+    sni: cdn-us1-ipv6server.zhicheng233.top
+    up: "100 Mbps"
+    down: "1000 Mbps"
