@@ -373,4 +373,3 @@ rules:
   - RULE-SET,lan,本地直连,no-resolve
   - GEOIP,CN,本地直连
   - MATCH,漏网之鱼
-x1.00
