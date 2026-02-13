@@ -68,7 +68,7 @@ proxy-providers:
   tgimbljjul_provider:
     type: http
     path: ./tgimbljjul_provider.yaml
-    url: https://ger1-ipv6server.zhicheng233.top:39241/s/clashMeta/9a677e85855e9b7cb236bd926b3c08a5
+    url: https://data.zhicheng233.top/clash/gernode
     interval: 3600
     proxy: DIRECT
     health-check:
