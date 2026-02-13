@@ -1,0 +1,117 @@
+proxies:
+  - name: "ef1edcd7-VLESS_TCP/TLS_Vision"
+    type: vless
+    server: ger1-ipv6server.zhicheng233.top
+    port: 27884
+    uuid: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    client-fingerprint: chrome
+  - name: "ef1edcd7-VLESS_WS"
+    type: vless
+    server: www.digitalocean.com
+    port: 443
+    uuid: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    udp: true
+    tls: true
+    network: ws
+    client-fingerprint: chrome
+    servername: ger1-ipv6server.zhicheng233.top
+    ws-opts:
+      path: /ityiws
+      headers:
+        Host: ger1-ipv6server.zhicheng233.top
+  - name: "ef1edcd7-VMess_WS"
+    type: vmess
+    server: www.digitalocean.com
+    port: 8443
+    uuid: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    alterId: 0
+    cipher: none
+    udp: true
+    tls: true
+    client-fingerprint: chrome
+    servername: ger1-ipv6server.zhicheng233.top
+    network: ws
+    ws-opts:
+      path: /ityi
+      headers:
+        Host: ger1-ipv6server.zhicheng233.top
+  - name: "ef1edcd7-Trojan_TCP"
+    type: trojan
+    server: ger1-ipv6server.zhicheng233.top
+    port: 20715
+    password: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    client-fingerprint: chrome
+    udp: true
+    sni: ger1-ipv6server.zhicheng233.top
+  - name: "ef1edcd7-singbox_hysteria2"
+    type: hysteria2
+    server: ger1-ipv6server.zhicheng233.top
+    port: 34037
+    password: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    alpn:
+        - h3
+    sni: ger1-ipv6server.zhicheng233.top
+    up: "100 Mbps"
+    down: "1000 Mbps"
+  - name: "ef1edcd7-VLESS_Reality_Vision"
+    type: vless
+    server: 188.68.49.82
+    port: 12310
+    uuid: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    servername: aod.itunes.apple.com
+    reality-opts:
+      public-key: WbtsVIxnn7Et9M8MEsVc0Tu4lx1IVXWli31CfOqvymE
+      short-id: 6ba85179e30d4fc2
+    client-fingerprint: chrome
+  - name: "ef1edcd7-VLESS_Reality_gPRC"
+    type: vless
+    server: 188.68.49.82
+    port: 33265
+    uuid: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    network: grpc
+    tls: true
+    udp: true
+    servername: aod.itunes.apple.com
+    reality-opts:
+      public-key: WbtsVIxnn7Et9M8MEsVc0Tu4lx1IVXWli31CfOqvymE
+      short-id: 6ba85179e30d4fc2
+    grpc-opts:
+      grpc-service-name: "grpc"
+    client-fingerprint: chrome
+  - name: "ef1edcd7-singbox_tuic"
+    server: ger1-ipv6server.zhicheng233.top
+    type: tuic
+    port: 32279
+    uuid: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    password: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    alpn:
+     - h3
+    congestion-controller: bbr
+    disable-sni: true
+    reduce-rtt: true
+    sni: ef1edcd7-singbox_tuic
+  - name: "ef1edcd7-VMess_HTTPUpgrade"
+    type: vmess
+    server: www.digitalocean.com
+    port: 33014
+    uuid: ef1edcd7-8fb8-4bb3-ba1d-87da652d63b9
+    alterId: 0
+    cipher: auto
+    udp: true
+    tls: true
+    client-fingerprint: chrome
+    servername: ger1-ipv6server.zhicheng233.top
+    network: ws
+    ws-opts:
+     path: /ityi
+     headers:
+       Host: ger1-ipv6server.zhicheng233.top
+     v2ray-http-upgrade: true
